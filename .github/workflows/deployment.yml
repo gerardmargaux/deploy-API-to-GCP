@@ -21,7 +21,7 @@ jobs:
     # Setup auth gcloud
     - uses: google-github-actions/auth@v0
       with:
-        credentials_json: '${{ secrets.GCP_DOCKER_PUSHER_AUTH }}'
+        credentials_json: '${{ secrets.GCP_SERVICE_ACCOUNT_AUTH }}'
 
     # Configure docker to use the gcloud command-line tool as a credential helper
     - run: |
