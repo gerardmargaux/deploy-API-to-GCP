@@ -18,3 +18,7 @@ def background_process_button():
     summary = summarizer(input_text, max_length=130, min_length=30, do_sample=False)[0]["summary_text"]
     print('Summary: {}'.format(summary))
     return render_template('index.html', variable=input_text, summary=summary)
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
