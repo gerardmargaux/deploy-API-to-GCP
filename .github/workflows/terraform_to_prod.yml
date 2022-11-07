@@ -5,8 +5,7 @@ on:
     workflows: ["build-docker-image"]
     types: [completed]
     branches:
-      - dev
-      - master
+      - main
 
 permissions:
   contents: read

@@ -2,10 +2,10 @@ name: 'build-docker-image'
 on:
   push:
     branches:
-      - dev
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   setup-build-publish-deploy:
