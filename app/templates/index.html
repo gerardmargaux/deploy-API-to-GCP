@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type=text/javascript>
+        $(function() {
+            $('a#text_btn').on('click', function(e) {
+            e.preventDefault()
+            $.getJSON('/background_process_button',
+                function(data) {
+                //do nothing
+            });
+            return false;
+            });
+        });
+</script>
+
+<div class='container'>
+    <h1>My First Web App using Flask</h1>
+    <label for="freeform">Text to summarize:</label>
+    <br>
+    <form action="{{ url_for('background_process_button') }}" method="post">
+        <textarea name="text" rows="20" cols="130", placeholder="Enter your text here">{{ variable }}</textarea>
+        <br>
+        <button type="submit" name="text_btn" class="btn btn-default">Summarize text</button>
+    </form>
+    <br>
+    <label for="story">Summarized text:</label>
+    <br>
+    <textarea id="story" name="story" rows="5" cols="130">{{ summary }}</textarea>
+
+</div>
+
+</body>
+</html>

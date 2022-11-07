@@ -1,0 +1,38 @@
+name: 'build-docker-image'
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  setup-build-publish-deploy:
+    name: Setup, Build, Publish, and Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - id: 'auth'
+      uses: 'google-github-actions/auth@v0'
+      with:
+        credentials_json: '${{ secrets.GCP_DOCKER_PUSHER_AUTH }}'
+
+    - name: 'Set up Cloud SDK'
+      uses: 'google-github-actions/setup-gcloud@v0'
+
+    # Configure docker to use the gcloud command-line tool as a credential helper
+    - name: Authenthification docker
+      run: |
+        gcloud auth configure-docker europe-west1-docker.pkg.dev
+      
+    # Build the Docker image
+    - name: Build
+      run: |        
+        docker build . --tag europe-west1-docker.pkg.dev/summarize-text-367819/docker-repository/first-flask-app
+
+    # Push the Docker image to Google Container Registry
+    - name: Publish
+      run: |
+        docker push europe-west1-docker.pkg.dev/summarize-text-367819/docker-repository/first-flask-app
