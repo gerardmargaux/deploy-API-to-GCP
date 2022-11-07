@@ -5,43 +5,31 @@ on:
       - dev
 
 jobs:
-  build:
-    name: Continuous Integration of the endpoint
+  setup-build-publish-deploy:
+    name: Setup, Build, Publish, and Deploy
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-
-    - name: Build the Docker image
-      run: |
-        git_hash=$(git rev-parse --short HEAD)
-        docker build . -t docker.pkg.github.com/gerardmargaux/summarize-text/flask-web-app:$git_hash
-
-    - name: Login and push the Docker image to Github Packages
-      run: |
-        git_hash=$(git rev-parse --short HEAD)
-        docker login https://docker.pkg.github.com --username ${{ github.actor }} --password ${{ secrets.TOKEN_GITHUB }}
-        docker push docker.pkg.github.com/gerardmargaux/summarize-text/flask-web-app:$git_hash
+    - name: Checkout
+      uses: actions/checkout@master
 
     # Setup gcloud CLI
     - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
       with:
-        service_account_email: ${{ secrets.GCP_CLIENT_EMAIL }}
-        service_account_key: ${{ secrets.GCP_CLIENT_ID }}
-        export_default_credentials: true
-    
-    # Configure Docker with Credentials
-    - name: Configure Docker
-      run: |
-        gcloud auth configure-docker europe-west1-docker.pkg.dev
+        version: '270.0.0'
+        service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT_AUTH }}
+
+    # Configure docker to use the gcloud command-line tool as a credential helper
+    - run: |
+        # Set up docker to authenticate
+        # via gcloud command-line tool.
+        gcloud auth configure-docker
       
     # Build the Docker image
-    - name: Build the image & tag it
+    - name: Build
+      run: |        
+        docker build . --tag eu.gcr.io/summarize-text/first-flask-app
+        
+    # Push the Docker image to Google Container Registry
+    - name: Publish
       run: |
-        gcloud config configurations create docker-pusher
-        gcloud config set project summarize-text
-        docker tag cloudrun-example-api europe-west4-docker.pkg.dev/my-cloudrun-api/docker-repository/my-api
-      
-    # Deploy the Docker image to GCP
-    - name: Push the image
-      run: |
-        docker push europe-west1-docker.pkg.dev/my-cloudrun-api/docker-repository/my-api
+        docker push eu.gcr.io/summarize-text/first-flask-app
