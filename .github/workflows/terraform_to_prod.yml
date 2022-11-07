@@ -3,10 +3,10 @@ name: 'infra-with-terraform'
 on:
   workflow_run:
     workflows: ["build-docker-image"]
+    types: [completed]
     branches:
       - dev
-    types:
-      - completed
+      - master
 
 permissions:
   contents: read
