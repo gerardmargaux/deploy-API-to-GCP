@@ -14,9 +14,7 @@ permissions:
 jobs:
   terraform:
     env:
-      GCP_ACCESS_KEY_ID: ${{ secrets.TF_KEY_ID }}
-      GCP_SECRET_ACCESS_KEY: ${{ secrets.TF_KEY_SECRET }}
-      TF_WORKSPACE: pro
+      GOOGLE_CREDENTIALS: ${{ secrets.GCP_SERVICE_ACCOUNT_AUTH }}
     name: "Terraform"
     runs-on: ubuntu-latest
     environment: production
