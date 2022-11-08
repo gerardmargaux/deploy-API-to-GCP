@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - development
   pull_request:
     branches:
       - main
@@ -11,6 +12,8 @@ jobs:
   setup-build-publish-deploy:
     name: Setup, Build, Publish, and Deploy
     runs-on: ubuntu-latest
+    env:
+          IMAGE_NAME: europe-west1-docker.pkg.dev/summarize-text-367819/docker-repository/first-flask-app
     steps:
     - uses: actions/checkout@v2
 
@@ -30,9 +33,14 @@ jobs:
     # Build the Docker image
     - name: Build
       run: |        
-        docker build . --tag europe-west1-docker.pkg.dev/summarize-text-367819/docker-repository/first-flask-app
+        docker build . --tag $IMAGE_NAME
 
     # Push the Docker image to Google Container Registry
     - name: Publish
       run: |
-        docker push europe-west1-docker.pkg.dev/summarize-text-367819/docker-repository/first-flask-app
+        docker push $IMAGE_NAME
+    
+    # Deploy the Docker image
+    - name: Deploy Docker image
+      run: |
+        gcloud run deploy summarize-text-367819 --image $IMAGE_NAME --region europe-west1 --platform managed
