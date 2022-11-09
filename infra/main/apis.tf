@@ -1,7 +1,3 @@
-#############################################
-#               Enable API's                #
-#############################################
-
 # Enable IAM API
 resource "google_project_service" "iam" {
   provider           = google-beta

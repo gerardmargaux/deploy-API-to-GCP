@@ -1,7 +1,3 @@
-#############################################
-#    Google Artifact Registry Repository    #
-#############################################
-
 # Create Artifact Registry Repository for Docker containers
 resource "google_artifact_registry_repository" "my_docker_repo" {
   provider = google-beta

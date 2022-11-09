@@ -1,7 +1,3 @@
-##############################################
-#       Deploy API to Google Cloud Run       #
-##############################################
-
 # Deploy image to Cloud Run
 resource "google_cloud_run_service" "api_test" {
   provider = google-beta
