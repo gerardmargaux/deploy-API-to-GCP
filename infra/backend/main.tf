@@ -35,7 +35,7 @@ resource "google_project_service" "storage" {
 # Google Cloud before actually calling them.
 resource "time_sleep" "wait_30_seconds" {
   create_duration = "30s"
-  depends_on = [google_project_service.storage]
+  depends_on      = [google_project_service.storage]
 }
 
 // Terraform plugin for creating random IDs
