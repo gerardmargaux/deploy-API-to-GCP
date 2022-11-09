@@ -1,8 +1,8 @@
-name: 'infra-with-terraform'
+name: 'Infrastructure using Terraform'
 
 on:
   workflow_run:
-    workflows: ["build-docker-image"]
+    workflows: ["Build Docker image"]
     types: [completed]
     branches:
       - main
@@ -28,22 +28,23 @@ jobs:
       with:
         terraform_version: 1.3.2
 
+    # Checks that all Terraform configuration files adhere to a canonical format
+    - name: Terraform Format
+      id: fmt
+      run: terraform fmt -check
+
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       id: init
       working-directory: ./infra
       run: | 
         terraform init
-
+    
     # Linting
     - name: Lint Terraform
       uses: actionshub/terraform-lint@main
 
-    # Checks that all Terraform configuration files adhere to a canonical format
-    - name: Terraform Format
-      id: fmt
-      run: terraform fmt -check
-
+    # Validate
     - name: Terraform Validate
       id: validate
       run: terraform validate -no-color
@@ -51,10 +52,10 @@ jobs:
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       working-directory: ./infra
-      run: terraform plan -lock-timeout=100s -input=false -out=./tfplan
+      run: terraform plan -no-color
 
     # Apply the changes
     - name: Terraform Apply
       id: apply
       working-directory: ./infra
-      run: terraform apply -lock-timeout=100s -auto-approve ./tfplan
+      run: terraform apply -auto-approve
