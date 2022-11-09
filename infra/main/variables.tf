@@ -1,7 +1,7 @@
 variable "project_id" {
   description = "The name of the project"
   type        = string
-  default     = "summarize-text-367819"
+  default     = "flask-cloud-368121"
 }
 
 variable "region" {
@@ -26,4 +26,10 @@ variable "docker_image" {
   description = "The name of the Docker image in the Artifact Registry repository to be deployed to Cloud Run"
   type        = string
   default     = "first-flask-app"
+}
+
+variable "first_time" {
+  description = "Boolean flag to indicate if this is the first time the application is running. If so, the cloud run step is omitted"
+  type        = bool
+  default     = true
 }

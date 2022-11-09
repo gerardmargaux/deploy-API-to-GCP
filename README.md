@@ -1,4 +1,4 @@
-# Deploying a Web application on GCP
+# Deploying a Flask API to Google Cloud Run using Terraform and GitHub Actions
 
 The goal of this personal project is to deploy a Dockerized Flask API to Google Cloud Run, while provisioning the required infrastructure with Terraform.
 
