@@ -31,5 +31,5 @@ variable "docker_image" {
 variable "first_time" {
   description = "Boolean flag to indicate if this is the first time the application is running. If so, the cloud run step is omitted"
   type        = bool
-  default     = true
+  default     = false
 }
