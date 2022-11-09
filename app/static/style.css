@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700;800&display=swap');
+
+
+* {
+  margin: 0; padding: 0;
+  box-sizing: border-box;
+}
+body, html {
+  width: 100%; height: 100%;
+  display:flex; align-items:center; justify-content: center; flex-direction: column;
+}
+body {
+  overflow-x: hidden;
+  font-family: 'Open Sans', sans-serif;
+  background-color: rgb(23, 23, 23);
+}
+/* header start */
+header {
+  width:100%; height: 150px;
+  display: flex; align-items: center; justify-content: center;
+  background-color: white;
+  box-shadow: 1px 1px 20px black;
+}
+.title {
+  background-image: url(./images/gradient-bg.gif);
+  font-weight: 800;
+  font-size: 6rem;
+  letter-spacing: 1.5rem;
+  background-clip: text;
+  color:transparent;
+  -webkit-background-clip: text;
+  background-size: cover;
+  background-position: center;
+}
+/* header end */
+
+/* main start */
+main {
+  width:100%;height: auto;
+  display: flex; align-items: center; justify-content: space-around; 
+  color:white;
+  background-color: #F1F1F1;
+  padding:1.5rem;
+}
+.container {
+  width:45%; height: 100%;
+  display: flex; align-items: center; justify-content: space-around; flex-direction: column;
+}
+h2 {
+  width:100%; height:5%;
+  color: rgb(255, 122, 107);
+}
+form {
+  display: flex; align-items: center; justify-content: flex-start; flex-direction: column;
+  height: 80%;
+}
+form button {
+  position: relative;
+  bottom: -2.5rem;
+  left: 0;
+  width:100%; height:3rem;
+  border-radius:0.75rem;
+  font-weight:bold;
+  color:white;
+  font-size: 1rem;
+  background-color:rgb(0, 174, 255);
+  border:none;
+  transition: all 250ms ease-in-out;
+}
+form button:hover {
+  cursor:pointer;
+  background-color:rgb(0, 69, 100);
+}
+textarea {
+  width: 100%; height:50vh;
+  outline-color: salmon;
+  font-size: 1.5rem; font-family: 'Open sans', sans-serif;
+}
+/* main end */
+
+/* footer start */
+footer {
+  width:100%;height:200px;
+  background-color: white;
+  display:flex; align-items:center; justify-content: center;flex-direction: column;
+}
+h3 {
+  height: 3rem;
+  color:black;
+}
+.social-networks {
+  width:auto; height:auto;
+  display:flex; align-items:center; justify-content: space-around;
+}
+a{
+  margin: 0 1rem 0 1rem;
+  transition:all 250ms ease-in-out;
+}
+a:hover {
+  opacity: 50%;
+}
+img {
+  width:2.5rem;
+}
+/* footer end */
