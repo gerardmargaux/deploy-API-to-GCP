@@ -54,11 +54,9 @@ jobs:
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
-      working-directory: ./infra
       run: terraform plan -no-color
 
     # Apply the changes
     - name: Terraform Apply
       id: apply
-      working-directory: ./infra
       run: terraform apply -auto-approve
