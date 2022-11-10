@@ -10,7 +10,7 @@ resource "google_cloud_run_service" "api_test" {
         image = "${var.region}-docker.pkg.dev/${var.project_id}/${var.repository}/${var.docker_image}"
         resources {
           limits = {
-            "memory" = "1G"
+            "memory" = "2G"
             "cpu"    = "1"
           }
         }
