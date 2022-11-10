@@ -52,10 +52,10 @@ jobs:
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       working-directory: ./infra
-      run: terraform plan -no-color
+      run: terraform plan -lock-timeout=100s -input=false -out=./tfplan
 
     # Apply the changes
     - name: Terraform Apply
       id: apply
       working-directory: ./infra
-      run: terraform apply -auto-approve
+      run: terraform apply -lock-timeout=100s -auto-approve ./tfplan
