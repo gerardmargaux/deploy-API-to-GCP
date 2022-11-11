@@ -37,8 +37,12 @@ jobs:
     - name: Build the Docker image
       run: |        
         docker build . --tag $IMAGE_NAME:${RELEASE_VERSION}
+      env:
+        RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
 
     # Push the Docker image to Google Container Registry
     - name: Push to Google Container Registry
       run: |
         docker push $IMAGE_NAME:${RELEASE_VERSION}
+      env:
+        RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
