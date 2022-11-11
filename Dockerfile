@@ -6,7 +6,11 @@ WORKDIR /flask-docker
 COPY . /flask-docker
 
 # Install pip requirements
-RUN python -m pip install -r requirements.txt
+# Install pip requirements
+RUN pip3 install virtualenv
+RUN python3 -m venv web-app 
+RUN . web-app/bin/activate
+RUN python3 -m pip install -r requirements.txt
 
 EXPOSE 5000
 ENV PORT 5000

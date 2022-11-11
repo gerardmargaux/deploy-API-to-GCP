@@ -54,9 +54,9 @@ jobs:
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
-      run: terraform plan -no-color
+      run: terraform plan -no-color -out=./terraform_plan
 
     # Apply the changes
     - name: Terraform Apply
       id: apply
-      run: terraform apply -auto-approve
+      run: terraform apply -auto-approve ./terraform_plan

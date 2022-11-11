@@ -1,20 +1,17 @@
 # Deploy image to Cloud Run
-resource "google_cloud_run_service" "api_test" {
+resource "google_cloud_run_service" "summarize-text" {
   provider = google-beta
   count    = var.first_time ? 0 : 1
-  name     = "api-test"
+  name     = "summarize-text"
   location = var.region
   template {
     spec {
       containers {
         image = "${var.region}-docker.pkg.dev/${var.project_id}/${var.repository}/${var.docker_image}"
-        ports {
-          container_port = 5000
-        }
         resources {
           limits = {
-            cpu = "1"
-            memory = "4G"
+            cpu    = "2"
+            memory = "8G"
           }
         }
       }
@@ -22,7 +19,7 @@ resource "google_cloud_run_service" "api_test" {
     metadata {
       annotations = {
         "autoscaling.knative.dev/minScale" = "1"
-        "autoscaling.knative.dev/maxScale" = "1"
+        "autoscaling.knative.dev/maxScale" = "20"
       }
     }
   }
@@ -51,11 +48,11 @@ resource "google_cloud_run_service_iam_policy" "noauth" {
   provider = google-beta
   location = var.region
   project  = var.project_id
-  service  = google_cloud_run_service.api_test[0].name
+  service  = google_cloud_run_service.summarize-text[0].name
 
   policy_data = data.google_iam_policy.noauth[0].policy_data
 }
 
 output "cloud_run_instance_url" {
-  value = var.first_time ? null : google_cloud_run_service.api_test[0].status.0.url
+  value = var.first_time ? null : google_cloud_run_service.summarize-text[0].status.0.url
 }
