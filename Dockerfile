@@ -6,7 +6,6 @@ WORKDIR /flask-docker
 COPY . /flask-docker
 
 # Install pip requirements
-# Install pip requirements
 RUN pip3 install virtualenv
 RUN python3 -m venv web-app 
 RUN . web-app/bin/activate
