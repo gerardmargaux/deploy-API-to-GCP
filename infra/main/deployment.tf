@@ -8,10 +8,13 @@ resource "google_cloud_run_service" "api_test" {
     spec {
       containers {
         image = "${var.region}-docker.pkg.dev/${var.project_id}/${var.repository}/${var.docker_image}"
+        ports {
+          container_port = 5000
+        }
         resources {
           limits = {
-            "memory" = "2G"
-            "cpu"    = "1"
+            cpu = "1"
+            memory = "4G"
           }
         }
       }
