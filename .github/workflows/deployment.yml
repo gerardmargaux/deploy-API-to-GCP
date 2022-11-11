@@ -12,7 +12,7 @@ jobs:
     name: Setup, Build, Publish, and Deploy
     runs-on: ubuntu-latest
     env:
-          IMAGE_NAME: europe-west1-docker.pkg.dev/flask-cloud-368121/docker-repository/first-flask-app
+          IMAGE_NAME: eu.gcr.io//flask-cloud-368121/docker-repository/first-flask-app
     steps:
     - uses: actions/checkout@v2
 
@@ -21,20 +21,24 @@ jobs:
       with:
         credentials_json: '${{ secrets.GCP_DOCKER_PUSHER_AUTH }}'
 
+    - name: Get tag
+      id: vars
+      run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
+
     - name: Set up Cloud SDK
       uses: 'google-github-actions/setup-gcloud@v0'
 
     # Configure docker to use the gcloud command-line tool as a credential helper
     - name: Authenthification docker
       run: |
-        gcloud auth configure-docker europe-west1-docker.pkg.dev
+        gcloud auth configure-docker -q
       
     # Build the Docker image
     - name: Build the Docker image
       run: |        
-        docker build . --tag $IMAGE_NAME
+        docker build . --tag $IMAGE_NAME:${RELEASE_VERSION}
 
     # Push the Docker image to Google Container Registry
     - name: Push to Google Container Registry
       run: |
-        docker push $IMAGE_NAME
+        docker push $IMAGE_NAME:${RELEASE_VERSION}
