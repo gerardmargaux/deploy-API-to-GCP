@@ -21,10 +21,6 @@ jobs:
       with:
         credentials_json: '${{ secrets.GCP_DOCKER_PUSHER_AUTH }}'
 
-    - name: Get tag
-      id: vars
-      run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
-
     - name: Set up Cloud SDK
       uses: 'google-github-actions/setup-gcloud@v0'
 
@@ -36,13 +32,9 @@ jobs:
     # Build the Docker image
     - name: Build the Docker image
       run: |        
-        docker build . --tag $IMAGE_NAME:${RELEASE_VERSION}
-      env:
-        RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
+        docker build . --tag $IMAGE_NAME
 
     # Push the Docker image to Google Container Registry
     - name: Push to Google Container Registry
       run: |
-        docker push $IMAGE_NAME:${RELEASE_VERSION}
-      env:
-        RELEASE_VERSION: ${{ steps.vars.outputs.tag }}
+        docker push $IMAGE_NAME
