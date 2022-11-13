@@ -1,10 +1,14 @@
-$(function() {
-  $('a#text_btn').on('click', function(e) {
-  e.preventDefault()
-  $.getJSON('/background_process_button',
-      function(data) {
-      //do nothing
-  });
-  return false;
-  });
-});
+const { createApp } = Vue;
+
+createApp({
+  data() {
+      return {
+          message: 'CONSOLE LOG RUN',
+      }
+  }, 
+  methods: {
+    getconsole() {
+      console.log(message);
+    }
+  }
+}).mount('#app')
