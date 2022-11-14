@@ -1,10 +1,22 @@
-$(function() {
-  $('a#text_btn').on('click', function(e) {
-  e.preventDefault()
-  $.getJSON('/background_process_button',
-      function(data) {
-      //do nothing
-  });
-  return false;
-  });
-});
+const { createApp } = Vue;
+
+createApp({
+  data() {
+      return {
+          loading:false,
+      }
+  }, 
+  methods: {
+    getLoader() {
+      var output = document.getElementById("story");
+
+      output.innerText = "";
+
+      if(output.value == ""){
+        this.loading = true;
+      }else {
+        this.loading = false;
+      }
+    }
+  }
+}).mount('#app')

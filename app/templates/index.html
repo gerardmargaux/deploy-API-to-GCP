@@ -4,45 +4,69 @@
     <meta charset="UTF-8">
 
     <link rel="stylesheet" href="../static/style.css">
+    <link rel="icon" type="image/x-icon" href="../static/images/favicon.ico">
 
     <script src="../static/index.js" defer></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
 
-    <title>Summarize text</title>
+
+    <title>Summarize.</title>
 </head>
 
 <body>
-    <header>
-        <h1 class="title">SUMMARIZE.</h1>
-    </header>
+    <div class="bubble"></div>
+    <div class="bubble-2"></div>
+    <div class="bubble-3"></div>
+    <div class="bubble-4"></div>
+    <div id="app">
+        <header>
+            <h1 class="title">SUMMARIZE.</h1>
+        </header>
 
-    <main>
-        <div class="container">
-            <h2>Text to summarize:</h2>
-            <form action="{{ url_for('background_process_button') }}" method="post">
-                <label for="text"></label>
-                <textarea id="text" name="text" rows="20" cols="130" placeholder="Enter your text here">{{ variable }}</textarea>
-                <button type="submit" name="text_btn" class="btn btn-default">Summarize text</button>
-            </form>
-        </div>
+        <main>
+            <div class="input-container">
+                <h2 class="input-title">TEXT TO SUMMARIZE :</h2>
+                <form action="{{ url_for('background_process_button') }}" method="post">
+                    <label for="text"></label>
+                    <textarea class="input-text" id="text" name="text" placeholder="Enter your text here">{{ variable }}</textarea>
 
-        <div class="container">
-            <h2>Summarized text:</h2>
-            <label for="story"></label>
-            <textarea id="story" name="story" rows="5" cols="130">{{ summary }}</textarea>
-        </div>
-    </main>
+                    <button @click="getLoader" name="text_btn" class="input-btn">Summarize</button>
+                </form>
+            </div>
 
-    <footer>
-        <h3>Follow me</h3>
-        <div class="social-networks">
-            <a href="https://github.com/gerardmargaux">
-                <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="Github logo" />
-            </a>
-            <a href="https://www.linkedin.com/in/margaux-g%C3%A9rard/">
-              <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-plain.svg"alt=" logo" />
-            </a>
-        </div>
-    </footer>
+            <span v-if="loading" class="loader"></span>
+
+            <div class="output-container">
+                <h2 class="output-title">SUMMARIZED TEXT :</h2>
+                <form>
+                    <label for="story"></label>
+                    <textarea class="output-text" id="story" name="story" placeholder="Resume appear here">{{ summary }}</textarea>
+                </form>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-description">
+                <h3 class="description-title">SUMMARIZE.</h3>
+                <p class="description-text">
+                    Summarize has a personal project in wich i decided to call a Huginface model and try it.
+                    It consiste to enter a text in english a it will be automatically summarize by the app.<br>
+                    It's not finish, I deploy this application on the Google Cloud.
+                </p>
+            </div>
+            
+            <div class="footer-links">
+                <a class="anchor-links" href="https://github.com/gerardmargaux">
+                    <img class="img-links"  src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="Github logo" />
+                </a>
+                <a class="anchor-links" href="https://www.linkedin.com/in/margaux-g%C3%A9rard/">
+                    <img class="img-links" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-plain.svg"alt=" Linkedin logo" />
+                </a>
+                <a class="anchor-links" href="mailto:margaux.gerard4@gmail.com">
+                    <img class="img-links" src="https://api.iconify.design/ic:baseline-email.svg"alt=" logo" />
+                </a>
+            </div>
+        </footer>
+    </div>
 </body>
 </html>
