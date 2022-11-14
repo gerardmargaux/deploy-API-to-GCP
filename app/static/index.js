@@ -3,12 +3,20 @@ const { createApp } = Vue;
 createApp({
   data() {
       return {
-          message: 'CONSOLE LOG RUN',
+          loading:false,
       }
   }, 
   methods: {
-    getconsole() {
-      console.log(message);
+    getLoader() {
+      var output = document.getElementById("story");
+
+      output.innerText = "";
+
+      if(output.value == ""){
+        this.loading = true;
+      }else {
+        this.loading = false;
+      }
     }
   }
 }).mount('#app')

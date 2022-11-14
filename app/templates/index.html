@@ -7,15 +7,13 @@
     <link rel="icon" type="image/x-icon" href="../static/images/favicon.ico">
 
     <script src="../static/index.js" defer></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
 
 
-    <title>Summarize text</title>
+    <title>Summarize.</title>
 </head>
 
 <body>
-    <div class="spinner"></div>
     <div class="bubble"></div>
     <div class="bubble-2"></div>
     <div class="bubble-3"></div>
@@ -32,13 +30,15 @@
                     <label for="text"></label>
                     <textarea class="input-text" id="text" name="text" placeholder="Enter your text here">{{ variable }}</textarea>
 
-                    <button type="submit" name="text_btn" class="input-btn">Summarize</button>
+                    <button @click="getLoader" name="text_btn" class="input-btn">Summarize</button>
                 </form>
             </div>
 
+            <span v-if="loading" class="loader"></span>
+
             <div class="output-container">
                 <h2 class="output-title">SUMMARIZED TEXT :</h2>
-                <form action="">
+                <form>
                     <label for="story"></label>
                     <textarea class="output-text" id="story" name="story" placeholder="Resume appear here">{{ summary }}</textarea>
                 </form>

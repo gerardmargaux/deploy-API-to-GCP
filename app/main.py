@@ -5,12 +5,13 @@ from transformers import pipeline
 model_path = "facebook/bart-large-cnn"
 app = Flask(__name__)
 
+
 @app.route('/')
 def index():
     return render_template('index.html')
 
 #background process happening without any refreshing
-@app.route('/background_process_button', methods=['POST'])
+@app.route('/', methods=['POST'])
 def background_process_button():
     try:
         input_text = request.form['text']
