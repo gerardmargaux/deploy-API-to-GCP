@@ -15,10 +15,13 @@ def index():
 def background_process_button():
     try:
         input_text = request.form['text']
-        summarizer = pipeline("summarization", model=model_path)
-        summary = summarizer(input_text, max_length=130, min_length=30, do_sample=False)[0]["summary_text"]
+        if len(input_text) < 20:
+            summary = "The input text is not long enough to be summarized. Please try again."
+        else:
+            summarizer = pipeline("summarization", model=model_path)
+            summary = summarizer(input_text, max_length=130, min_length=30, do_sample=False)[0]["summary_text"]
     except:
-        summary = "ERROR: Please try again"
+        summary = "ERROR: Please try again."
     return render_template('index.html', variable=input_text, summary=summary)
 
 
