@@ -108,4 +108,7 @@ In order to deploy using Github actions, we need to store the credentials of the
 | GCP_DOCKER_PUSHER_AUTH | Access key of the Docker pusher service account | `json` | yes |
 | GCP_SERVICE_ACCOUNT_AUTH  | Access key of the infrastructure service account | `json` | yes |
 
+## 📚 Other useful resources
+- [Blog post: Deploying a flask api to cloudrun](https://www.fpgmaas.com/blog/deploying-a-flask-api-to-cloudrun)
+- [Hugging Face model used for the summarization](https://huggingface.co/facebook/bart-large-cnn?text=The+tower+is+324+metres+%281%2C063+ft%29+tall%2C+about+the+same+height+as+an+81-storey+building%2C+and+the+tallest+structure+in+Paris.+Its+base+is+square%2C+measuring+125+metres+%28410+ft%29+on+each+side.+During+its+construction%2C+the+Eiffel+Tower+surpassed+the+Washington+Monument+to+become+the+tallest+man-made+structure+in+the+world%2C+a+title+it+held+for+41+years+until+the+Chrysler+Building+in+New+York+City+was+finished+in+1930.+It+was+the+first+structure+to+reach+a+height+of+300+metres.+Due+to+the+addition+of+a+broadcasting+aerial+at+the+top+of+the+tower+in+1957%2C+it+is+now+taller+than+the+Chrysler+Building+by+5.2+metres+%2817+ft%29.+Excluding+transmitters%2C+the+Eiffel+Tower+is+the+second+tallest+free-standing+structure+in+France+after+the+Millau+Viaduct.)
 

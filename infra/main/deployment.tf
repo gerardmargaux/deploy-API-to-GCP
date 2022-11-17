@@ -7,7 +7,7 @@ resource "google_cloud_run_service" "summarize-text" {
   template {
     spec {
       containers {
-        image = "${var.region}-docker.pkg.dev/${var.project_id}/${var.repository}/${var.docker_image}:latest"
+        image = "${var.region}-docker.pkg.dev/${var.project_id}/${var.repository}/${var.docker_image}"
         resources {
           limits = {
             cpu    = "2"
