@@ -1,27 +1,27 @@
 # Enable IAM API
 resource "google_project_service" "iam" {
-  provider           = google-beta
+  provider           = google
   service            = "iam.googleapis.com"
   disable_on_destroy = false
 }
 
 # Enable Artifact Registry API
 resource "google_project_service" "artifactregistry" {
-  provider           = google-beta
+  provider           = google
   service            = "artifactregistry.googleapis.com"
   disable_on_destroy = false
 }
 
 # Enable Cloud Run API
 resource "google_project_service" "cloudrun" {
-  provider           = google-beta
+  provider           = google
   service            = "run.googleapis.com"
   disable_on_destroy = false
 }
 
 # Enable Cloud Resource Manager API
 resource "google_project_service" "resourcemanager" {
-  provider           = google-beta
+  provider           = google
   service            = "cloudresourcemanager.googleapis.com"
   disable_on_destroy = false
 }

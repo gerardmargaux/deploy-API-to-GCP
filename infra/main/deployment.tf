@@ -1,6 +1,6 @@
 # Deploy image to Cloud Run
 resource "google_cloud_run_service" "summarize-text" {
-  provider = google-beta
+  provider = google
   count    = var.first_time ? 0 : 1
   name     = "summarize-text"
   location = var.region
@@ -32,7 +32,7 @@ resource "google_cloud_run_service" "summarize-text" {
 
 # Create a policy that allows all users to invoke the API
 data "google_iam_policy" "noauth" {
-  provider = google-beta
+  provider = google
   count    = var.first_time ? 0 : 1
   binding {
     role = "roles/run.invoker"
@@ -45,7 +45,7 @@ data "google_iam_policy" "noauth" {
 # Apply the no-authentication policy to our Cloud Run Service.
 resource "google_cloud_run_service_iam_policy" "noauth" {
   count    = var.first_time ? 0 : 1
-  provider = google-beta
+  provider = google
   location = var.region
   project  = var.project_id
   service  = google_cloud_run_service.summarize-text[0].name

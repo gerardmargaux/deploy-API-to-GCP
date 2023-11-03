@@ -1,13 +1,13 @@
 terraform {
   required_providers {
-    google-beta = {
-      source  = "hashicorp/google-beta"
-      version = "4.25.0"
+    google = {
+      source  = "hashicorp/google"
+      version = "5.3.0"
     }
   }
 }
 
-provider "google-beta" {
+provider "google" {
   project = var.project_id
   region  = var.region
   zone    = var.zone

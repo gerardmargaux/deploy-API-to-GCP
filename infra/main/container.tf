@@ -1,6 +1,6 @@
 # Create Artifact Registry Repository for Docker containers
 resource "google_artifact_registry_repository" "my_docker_repo" {
-  provider = google-beta
+  provider = google
 
   location      = var.region
   repository_id = var.repository
@@ -11,7 +11,7 @@ resource "google_artifact_registry_repository" "my_docker_repo" {
 
 # Create a Service Account
 resource "google_service_account" "docker_pusher" {
-  provider = google-beta
+  provider = google
 
   account_id   = "docker-pusher"
   display_name = "Docker Container Pusher"
@@ -20,7 +20,7 @@ resource "google_service_account" "docker_pusher" {
 
 # Give Service Account permission to push to the Artifact Registry Repository
 resource "google_artifact_registry_repository_iam_member" "docker_pusher_iam" {
-  provider = google-beta
+  provider = google
 
   location   = google_artifact_registry_repository.my_docker_repo.location
   repository = google_artifact_registry_repository.my_docker_repo.repository_id
